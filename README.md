@@ -5,7 +5,7 @@ sentiment analysis study with spark from [shiyanlou](https://www.shiyanlou.com/c
 ## feature
 
 * process and tokenize tweets history data
-* use random forrest to predict sentiment about usa president election
+* use random forest to predict sentiment about usa president election
 * use Basemap to visualise analysis result
 
 ## todos
@@ -15,6 +15,7 @@ sentiment analysis study with spark from [shiyanlou](https://www.shiyanlou.com/c
 
 ## References
 
+* [random forest](http://spark.apache.org/docs/latest/ml-classification-regression.html#random-forests)
 * [naivie bayse example](http://spark.apache.org/docs/latest/ml-classification-regression.html#naive-bayes)
 * [basemap geo](http://introtopython.org/visualization_earthquakes.html#Adding-detail)
 * [real time analysis](https://www.ibm.com/developerworks/cn/analytics/blog/analyze-social-media-data-real-time/index.html)
