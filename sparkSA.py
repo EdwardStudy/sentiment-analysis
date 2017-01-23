@@ -26,22 +26,23 @@ sqlContext = SQLContext(sc)
 remove_spl_char_regex = re.compile('[%s]' % re.escape(string.punctuation))
 
 stopwords = [u'rt', u're', u'i', u'me', u'my', u'myself', u'we', u'our',
-             u'ours', u'ourselves', u'you', u'your',u'yours', u'yourself',
+             u'ours', u'ourselves', u'you', u'your', u'yours', u'yourself',
              u'yourselves', u'he', u'him', u'his', u'himself', u'she', u'her',
              u'hers', u'herself', u'it', u'its', u'itself', u'they', u'them',
              u'their', u'theirs', u'themselves', u'what', u'which', u'who',
              u'whom', u'this', u'that', u'these', u'those', u'am', u'is', u'are',
-             u'was', u'were',u'be', u'been', u'being', u'have', u'has', u'had',
-             u'having', u'do', u'does', u'did', u'doing', u'a',u'an', u'the',
+             u'was', u'were', u'be', u'been', u'being', u'have', u'has', u'had',
+             u'having', u'do', u'does', u'did', u'doing', u'a', u'an', u'the',
              u'and', u'but', u'if', u'or', u'because', u'as', u'until', u'while',
-             u'of', u'at', u'by',u'for', u'with', u'about', u'against', u'between',
-             u'into', u'through', u'during', u'before', u'after',u'above', u'below',
+             u'of', u'at', u'by', u'for', u'with', u'about', u'against', u'between',
+             u'into', u'through', u'during', u'before', u'after', u'above', u'below',
              u'to', u'from', u'up', u'down', u'in', u'out', u'on', u'off', u'over',
              u'under', u'again', u'further', u'then', u'once', u'here', u'there',
              u'when', u'where', u'why', u'how', u'all', u'any', u'both', u'each',
              u'few', u'more', u'most', u'other', u'some', u'such', u'no', u'nor',
              u'not', u'only', u'own', u'same', u'so', u'than', u'too', u'very',
              u's', u't', u'can', u'will', u'just', u'don', u'should', u'now']
+
 
 def tokenize(text):
     tokens = []
@@ -61,6 +62,7 @@ def tokenize(text):
             tokens.append(word)
 
     return tokens
+
 
 # 利用Spark提供的Word2Vec功能结合其提供的text8文件中的一部分单词进行了word2vec模型的预训练
 lookup = sqlContext.read.parquet('./word2vecM_simple/data').alias('lookup')
@@ -87,12 +89,13 @@ def doc2vec(document):
     vec = doc_vec / float(tot_words)
     return vec
 
+
 # trainin
 with open('tweets.json', 'r') as f:
     rawTrain_data = json.load(f)
     f.close()
 
-train_data =[]
+train_data = []
 
 for obj in rawTrain_data['results']:
     token_text = tokenize(obj['text'])
@@ -120,7 +123,7 @@ test_rdd = sc.parallelize(test_data)
 
 # test randomForest
 model = RandomForest.trainClassifier(train_rdd, numClasses=3, categoricalFeaturesInfo={},
-                                     numTrees=3, featureSubsetStrategy='auto',impurity='gini',
+                                     numTrees=3, featureSubsetStrategy='auto', impurity='gini',
                                      maxDepth=4, maxBins=32)
 
 predictions = model.predict(test_rdd.map(lambda x: x.features))

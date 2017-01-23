@@ -6,35 +6,36 @@ import matplotlib as mpl
 from matplotlib.colors import rgb2hex
 from matplotlib.patches import Polygon
 
+
 def res_visulization(rawTest_data, pred_result):
     # popdensity_ori is the base of popular of state
-    popdensity_ori = {'New Jersey':  0., 'Rhode Island': 0., 'Massachusetts': 0., 'Connecticut': 0.,
-                      'Maryland': 0.,'New York': 0., 'Delaware': 0., 'Florida': 0., 'Ohio': 0., 'Pennsylvania': 0.,
-                      'Illinois': 0., 'California': 0., 'Hawaii': 0., 'Virginia': 0., 'Michigan':    0.,
+    popdensity_ori = {'New Jersey': 0., 'Rhode Island': 0., 'Massachusetts': 0., 'Connecticut': 0.,
+                      'Maryland': 0., 'New York': 0., 'Delaware': 0., 'Florida': 0., 'Ohio': 0., 'Pennsylvania': 0.,
+                      'Illinois': 0., 'California': 0., 'Hawaii': 0., 'Virginia': 0., 'Michigan': 0.,
                       'Indiana': 0., 'North Carolina': 0., 'Georgia': 0., 'Tennessee': 0., 'New Hampshire': 0.,
                       'South Carolina': 0., 'Louisiana': 0., 'Kentucky': 0., 'Wisconsin': 0., 'Washington': 0.,
-                      'Alabama':  0., 'Missouri': 0., 'Texas': 0., 'West Virginia': 0., 'Vermont': 0.,
-                      'Minnesota':  0., 'Mississippi': 0., 'Iowa': 0., 'Arkansas': 0., 'Oklahoma': 0.,
+                      'Alabama': 0., 'Missouri': 0., 'Texas': 0., 'West Virginia': 0., 'Vermont': 0.,
+                      'Minnesota': 0., 'Mississippi': 0., 'Iowa': 0., 'Arkansas': 0., 'Oklahoma': 0.,
                       'Arizona': 0., 'Colorado': 0., 'Maine': 0., 'Oregon': 0., 'Kansas': 0., 'Utah': 0.,
-                      'Nebraska': 0., 'Nevada': 0., 'Idaho': 0., 'New Mexico':  0., 'South Dakota':    0.,
+                      'Nebraska': 0., 'Nevada': 0., 'Idaho': 0., 'New Mexico': 0., 'South Dakota': 0.,
                       'North Dakota': 0., 'Montana': 0., 'Wyoming': 0., 'Alaska': 0.}
     # popdensity is to store result of prediction
-    popdensity_pred  = {'New Jersey':  0., 'Rhode Island': 0., 'Massachusetts': 0., 'Connecticut': 0.,
-                   'Maryland': 0.,'New York': 0., 'Delaware': 0., 'Florida': 0., 'Ohio': 0., 'Pennsylvania': 0.,
-                    'Illinois': 0., 'California': 0., 'Hawaii': 0., 'Virginia': 0., 'Michigan':    0.,
-                    'Indiana': 0., 'North Carolina': 0., 'Georgia': 0., 'Tennessee': 0., 'New Hampshire': 0.,
-                    'South Carolina': 0., 'Louisiana': 0., 'Kentucky': 0., 'Wisconsin': 0., 'Washington': 0.,
-                    'Alabama':  0., 'Missouri': 0., 'Texas': 0., 'West Virginia': 0., 'Vermont': 0.,
-                    'Minnesota':  0., 'Mississippi': 0., 'Iowa': 0., 'Arkansas': 0., 'Oklahoma': 0.,
-                    'Arizona': 0., 'Colorado': 0., 'Maine': 0., 'Oregon': 0., 'Kansas': 0., 'Utah': 0.,
-                    'Nebraska': 0., 'Nevada': 0., 'Idaho': 0., 'New Mexico':  0., 'South Dakota':    0.,
-                    'North Dakota': 0., 'Montana': 0., 'Wyoming': 0., 'Alaska': 0.}
+    popdensity_pred = {'New Jersey': 0., 'Rhode Island': 0., 'Massachusetts': 0., 'Connecticut': 0.,
+                       'Maryland': 0., 'New York': 0., 'Delaware': 0., 'Florida': 0., 'Ohio': 0., 'Pennsylvania': 0.,
+                       'Illinois': 0., 'California': 0., 'Hawaii': 0., 'Virginia': 0., 'Michigan': 0.,
+                       'Indiana': 0., 'North Carolina': 0., 'Georgia': 0., 'Tennessee': 0., 'New Hampshire': 0.,
+                       'South Carolina': 0., 'Louisiana': 0., 'Kentucky': 0., 'Wisconsin': 0., 'Washington': 0.,
+                       'Alabama': 0., 'Missouri': 0., 'Texas': 0., 'West Virginia': 0., 'Vermont': 0.,
+                       'Minnesota': 0., 'Mississippi': 0., 'Iowa': 0., 'Arkansas': 0., 'Oklahoma': 0.,
+                       'Arizona': 0., 'Colorado': 0., 'Maine': 0., 'Oregon': 0., 'Kansas': 0., 'Utah': 0.,
+                       'Nebraska': 0., 'Nevada': 0., 'Idaho': 0., 'New Mexico': 0., 'South Dakota': 0.,
+                       'North Dakota': 0., 'Montana': 0., 'Wyoming': 0., 'Alaska': 0.}
 
     idx = 0
     for obj in rawTest_data['results']:
         user_location = obj['user_location']
         popdensity_ori[user_location] += (obj['polarity'] - 1)
-        popdensity_pred[user_location] += (pred_result[idx] -1)
+        popdensity_pred[user_location] += (pred_result[idx] - 1)
         idx += 1
 
     print('popdensity_ori')
@@ -53,7 +54,7 @@ def res_visulization(rawTest_data, pred_result):
     # m1 is use map
     m1 = Basemap(llcrnrlon=-119, llcrnrlat=22, urcrnrlon=-64, urcrnrlat=49, projection='lcc',
                  lat_1=33, lat_2=45, lon_0=-95, ax=ax1)
-    shp_info = m1.readshapefile('./shapefile/st99_d00', 'states',  drawbounds=True)
+    shp_info = m1.readshapefile('./shapefile/st99_d00', 'states', drawbounds=True)
     print(shp_info)
 
     # cities
@@ -70,11 +71,11 @@ def res_visulization(rawTest_data, pred_result):
            35.75, 32.74, 61.37, 40.59, 38.49, 33.04, 44.69,
            44.045, 42.165, 37.77, 35.63, 33.86, 27.77, 32.81]
     lon = [-121.49, -122.07, -119.68, -117.05, -110.45, -114.48, -107.30,
-           -111.86, -105.31, -111.43,  -106.25, -99.93, -99.44, -98.27,
+           -111.86, -105.31, -111.43, -106.25, -99.93, -99.44, -98.27,
            -96.726, -96.93, -97.56, -93.90, -93.21, -92.29, -92.37,
            -91.87, -89.62, -88.99, -84.54, -86.26, -82.76, -84.67,
            -86.70, -89.68, -152.40, -77.21, -80.95, -83.64, -69.38,
-           -72.71, -74.95, -78.17, -79.81, -80.945,  -81.67, -86.79]
+           -72.71, -74.95, -78.17, -79.81, -80.945, -81.67, -86.79]
     # colors based on population
     colors_ori = {}
     colors_pred = {}
